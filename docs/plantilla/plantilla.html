@@ -145,12 +145,24 @@
 <div class="codigo">
     <label for="cod-html" 
     class="label">
-        HTML 
+        SQL
         <i class="bs-copy c-bodyui fz-20 btn-copy"></i>
     </label>
-<pre class="cod-html pt-1">
-    <!-- Ejemplo de código HTML -->
-    <div class="c-white">Estos es un ejemplo de código</div>
+<pre class="cod-sql pt-1">
+    CREATE OR ALTER FUNCTION [library].[ValidarUsuario] (@NombreUsuario NVARCHAR(50), @Contrasena NVARCHAR(50))
+    RETURNS BIT
+    AS
+    BEGIN
+        DECLARE @EsValido BIT;
+        
+        IF EXISTS (SELECT 1 FROM [library].[Usuarios] WHERE NombreUsuario = @NombreUsuario AND Contrasena = @Contrasena)
+            SET @EsValido = 1;
+        ELSE
+            SET @EsValido = 0;
+        
+        RETURN @EsValido;
+    END
+
 </pre>
 </div>
 
@@ -195,7 +207,7 @@
         BS.ToolTipsInit()
         BS.BotonInicioInit()
         BS.CodigoHtmlInit()
-        BS.CodigoJsInit()
+        BS.CodigoSqlInit()
         BS.PersonalizadoInit({ori: "disparador"})
         document.querySelectorAll("#l1 ul li a")[1].classList.add("c-red");
 

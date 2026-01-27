@@ -14,6 +14,9 @@ ThemesDocs.Init()
 Search.Init()
 
 
+document.querySelectorAll("iframe").forEach(ele => ele.remove())
+document.querySelectorAll("ins").forEach(ele => ele.remove())
+
 BS = window.BS 
 
 export default BS;
