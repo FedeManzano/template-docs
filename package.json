@@ -1,9 +1,12 @@
 {
-  "name": "body_docs",
-  "version": "4.0.0",
-  "description": "Documentación de la biblioteca bodystyle v6.5.0.",
+  "name": "template_docs",
+  "version": "1.0.0",
+  "description": "Template para docuementar, tema claro y oscuro",
   "keywords": [
     "Documentacion",
+    "Template",
+    "Dark Mode",
+    "Light Mode",
     "bodyui"
   ],
   "license": "MIT",
@@ -22,7 +25,6 @@
     "webpack-cli": "^6.0.1"
   },
   "dependencies": {
-    "bodyui2": "^6.5.4",
-    "dytips": "^3.0.0"
+    "bodyui2": "^6.5.4"
   }
 }
