@@ -16,6 +16,10 @@
     <i>Template con las funcionabilidades suficientes para documentar cualquier cosa que desees</i>
 </p>
 
+<a href="https://bodystyle.webcindario.com">Bodystyle Docs</a>
+
+> Desde el enlace de arriba podemos ver un ejemplo del template funcionando como documentación de [Bodystyle](https://github.com/FedeManzano/bodystyle).
+
 ---
 
 ## :dart: Acerca de 
@@ -107,8 +111,24 @@ npm install --save-dev babel-loader
 npm install --save-dev @babel/core
 npm install --save-dev @babel/preset-env
 ```
-Una vez instaladas las dependencias podemos ejecutar el coomando que permitirá generar el archivo ```body-docs.js``` en el directorio ```/dist/js```, luego reemplazamos este archivo en ```/pages/js/body-docs.js```.
+Una vez instaladas las dependencias podemos ejecutar el coomando que permitirá generar el archivo ```docs-body.js``` en el directorio ```/dist/js```, luego reemplazamos este archivo en ```/pages/js/docs-body.js```.
 
 ```shell
+## Luego de este comendo es necesario reemplazar 
+## el archivo /dist/js/docs-body.js en /docs/js/docs-body.js
 npm run build # se genera el archivo transpilado.
+```
+
+## 🎨 Sass
+
+Todos los archivos de estilos son procesados a través de 
+[sass](https://sass-lang.com/) necesario si queremos realizar modificaciones en los estilos predefinos. Es importante aclarar que en el directorio /docs/css están incluídos los archivos css.
+
+### Instalación
+
+Para instalar sass lo podemos hacer de forma global y utilizarlo en todos los proyectos que se necesiten.
+
+```shell
+# A través de NPM podemos instalar el procesador.
+npm install -g sass
 ```
