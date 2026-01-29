@@ -27,6 +27,83 @@ Se trata de un sitio web reutilizable para aplicarlo en diversos proyectos en lo
 Para poder editar y utilizar la lógica del template se utilizan una serie de dependencias que permitirán procesar y 
 transpilar el código de JavaScript.
 
+### Dependencias  Desarrollo
 | Nombre | Descripción | Sitio Oficial |
-| ------ | ----------- | ------------- |
-| :white_check_mark: Webpack | Permite modularizar el código de JS y reenzamblarlo en un sólo archivo ```.bundle.js``` | [webpack 5.104.1](https://webpack.js.org/) |          
+| ------                     | ----------- | ------------- |
+| :white_check_mark: Webpack | Permite modularizar el código de JS y reenzamblarlo en un sólo archivo ```.bundle.js``` | [webpack 5.104.1](https://webpack.js.org/) |
+| :white_check_mark: Babel | Permite transpilar el código ES6 a ES5. | [Babel 5.8.38](https://babeljs.io/) |
+
+
+### Dependencias 
+
+| Nombre | Descripción | Sitio Oficial |
+|--------|-------------|---------------|
+:white_check_mark: Bodystyle | Framework para el diseño y desarrollo de la interfaz de usuario en sitios y aplicaciones web. | [Bodystyle 6.5.0](https://bodystyle.webcindario.com) |
+
+### Package.json
+
+El paso siguiente es describir como viene configurado el archivo 
+```package.json``` para poder ajustarlo a las necesidades del desarrollador.
+
+```js
+{
+  // Nombre del proyecto
+  // Lo deciden ustedes
+  "name": "template_docs",
+
+  // Versión en este caso 1.0.0
+  "version": "1.0.0",
+
+  // Alguna descripción acorde al proyecto en curso
+  "description": "Template para docuementar, tema claro y oscuro",
+  "keywords": [
+    "Documentacion",
+    "Template",
+    "Dark Mode",
+    "Light Mode",
+    "bodyui"
+  ],
+  // Licencia a elección en este caso MIT
+  "license": "MIT",
+
+  // Autor equipo de desarrollo
+  "author": "Federico Manzano",
+
+  // Archivo raíz de los módulos JS
+  "main": "app.js",
+
+  // Permite ejecurar webpack y generar el archivo 
+  // transpilado del proyecto en desarrollo
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.28.5",
+    "@babel/preset-env": "^7.28.5",
+    "babel": "^5.8.38",
+    "babel-loader": "^10.0.0",
+    "webpack": "^5.104.1",
+    "webpack-cli": "^6.0.1"
+  },
+  "dependencies": {
+    "bodyui2": "^6.5.4"
+  }
+}
+```
+
+## 🚀 Inicializar Proyecto
+
+Es necesario inicializar el proyecto utilizando [NodeJS](https://nodejs.org/en) y [npm](https://www.npmjs.com/) para poder instalar todas las dependencias antes mencionadas.
+
+```shell
+npm init # para inicializar el proyecto
+
+## Luego instalar las dependencias
+npm install --save-dev webpack
+npm install --save-dev webpack-cli
+npm install --save-dev babel
+npm install --save-dev babel-loader
+npm install --save-dev @babel/core
+npm install --save-dev @babel/preset-env
+```
