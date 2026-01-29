@@ -20,7 +20,7 @@
 
 ## :dart: Acerca de 
 
-Se trata de un sitio web reutilizable para aplicarlo en diversos proyectos en los cuales se documente lo que sea brindando el formato y los elementos para esta tarea.
+Se trata de un sitio web reutilizable para aplicarlo en diversos proyectos en los cuales se necesite documentar lo que sea, brindando el formato y los elementos para esta tarea.
 
 ## :building_construction: Dependencias
 
@@ -106,4 +106,9 @@ npm install --save-dev babel
 npm install --save-dev babel-loader
 npm install --save-dev @babel/core
 npm install --save-dev @babel/preset-env
+```
+Una vez instaladas las dependencias podemos ejecutar el coomando que permitirá generar el archivo ```body-docs.js``` en el directorio ```/dist/js```, luego reemplazamos este archivo en ```/pages/js/body-docs.js```.
+
+```shell
+npm run build # se genera el archivo transpilado.
 ```
