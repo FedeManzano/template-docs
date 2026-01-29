@@ -22,3 +22,11 @@
 
 Se trata de un sitio web reutilizable para aplicarlo en diversos proyectos en los cuales se documente lo que sea brindando el formato y los elementos para esta tarea.
 
+## :building_construction: Dependencias
+
+Para poder editar y utilizar la lógica del template se utilizan una serie de dependencias que permitirán procesar y 
+transpilar el código de JavaScript.
+
+| Nombre | Descripción | Sitio Oficial |
+| ------ | ----------- | ------------- |
+| :white_check_mark: Webpack | Permite modularizar el código de JS y reenzamblarlo en un sólo archivo ```.bundle.js```            
