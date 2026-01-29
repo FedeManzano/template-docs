@@ -29,4 +29,4 @@ transpilar el código de JavaScript.
 
 | Nombre | Descripción | Sitio Oficial |
 | ------ | ----------- | ------------- |
-| :white_check_mark: Webpack | Permite modularizar el código de JS y reenzamblarlo en un sólo archivo ```.bundle.js```            
+| :white_check_mark: Webpack | Permite modularizar el código de JS y reenzamblarlo en un sólo archivo ```.bundle.js``` | [webpack 5.104.1](https://webpack.js.org/) |          
