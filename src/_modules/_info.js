@@ -1,7 +1,16 @@
-
+/**
+ * Archivo con información a través de elementos dinámicos proporcionados por BodyUI.
+ * @module Info
+ * @author Federico Manzano <Estudiante de Ingeniería en Informática>
+ */
 
 const InfoInit = () => {
 
+
+    /**
+     * Carga en el ID "autor_content" el contenido dinámico del autor.
+     * @type {string}
+     */
     document.getElementById("autor_content").innerHTML =
         `
         <div class="f-flex just-center">
@@ -12,7 +21,12 @@ const InfoInit = () => {
         </div>
         `
 
-     let info_autor = 
+
+    /**
+     * Información del autor para los tooltips. 
+     *  @type {string}
+     */
+    let info_autor = 
     `
     <div class="card-notification-dark "> 
         <div class="row">
@@ -27,10 +41,14 @@ const InfoInit = () => {
     </div>
     `
 
+    // Asignación de la información del autor a los elementos correspondientes.
     document.getElementById("logo_marca").dataset.info = info_autor;
+
+    // Asignación de la información del autor al enlace del autor.
     document.getElementById("autor_enlace").dataset.info = info_autor;
 
-
+    // Información general de Bodystyle para el elemento con ID "info_general".
+    // @type {string}
     document.getElementById("info_general").innerHTML =
         `
     <div id="card_general" class="card-notification-dark"> 
@@ -51,6 +69,8 @@ const InfoInit = () => {
     </div>
     `
 
+    // Reasignación del contenido dinámico del autor en el ID "autor_content".
+    // @type {string}
     document.getElementById("autor_content").innerHTML =
         `
         <div class="f-flex just-center">

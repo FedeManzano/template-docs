@@ -16,6 +16,12 @@
     <i>Template con las funcionabilidades suficientes para documentar cualquier cosa que desees</i>
 </p>
 
+---
+
+## Ejemplo 
+
+Desde el enlace hay un ejemplo del template funcionando.
+
 <a align="center" href="https://bodystyle.webcindario.com">Bodystyle Docs</a>
 
 > Desde el enlace de arriba podemos ver un ejemplo del template funcionando como documentación de [Bodystyle](https://github.com/FedeManzano/bodystyle).
