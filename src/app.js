@@ -1,5 +1,5 @@
 
-import "./_modules/bodystyle.bundled"
+import "bodyui2/dist/js/bodystyle.min.js"
 import StartDocs from "./_modules/_init_docs"
 import StartMenues from "./_modules/_template_menues"
 import Info from "./_modules/_info"

@@ -1,1 +1,1 @@
-/*! For license information please see bodystyle.bundle.js.LICENSE.txt */
+/*! For license information please see bodystyle.min.js.LICENSE.txt */
