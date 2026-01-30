@@ -138,3 +138,17 @@ Para instalar sass lo podemos hacer de forma global y utilizarlo en todos los pr
 # A través de NPM podemos instalar el procesador.
 npm install -g sass
 ```
+
+### Ejecución 
+
+Para procesar los archivos sass necesitamos utilizar el comando ```sass```.
+
+```shell
+# Genera el archivo minificado de Bodystyle 
+sass -s compressed sass/bodystyle.scss docs/css/bodystyle.min.css
+
+# Genera el archivo minificado de Docs 
+# Estos son los archivos con los estilos de estilos propios de la documentación
+sass -s compressed sass/docs.scss docs/css/docs.css
+```
+
