@@ -1,14 +1,17 @@
 
 
 
-
-    const parametrosBusqueda = [
-        { 
-            nombre: "GetStarted", 
-            enlace: "get_started.html",
-            tags: ["inicialización", "comenzar", "empezar", "setup", "instalación", "start"] 
-        },
-    ]
+/**
+ * Objeto de búsqueda para la documentación.
+ * Permite buscar y navegar a diferentes secciones o páginas.
+ */
+const parametrosBusqueda = [
+    { 
+        nombre: "GetStarted", 
+        enlace: "get_started.html",
+        tags: ["inicialización", "comenzar", "empezar", "setup", "instalación", "start"] 
+    },
+]
 
 
 let ul = document.createElement("ul");
