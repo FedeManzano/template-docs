@@ -1,4 +1,11 @@
 
+/**
+ * Módulo que contiene las funciones para
+ * inicializar los menús de navegación
+ * de la documentación.
+ * /**
+ * Inicializa los menús de navegación
+ */
 const InitMenues = () => {
 
      /**
@@ -50,7 +57,6 @@ const InitMenues = () => {
                         <input id="sw" type="checkbox" name="sw_1">
                         <label id="lsw" for="sw" class="switch-rojo com-trigger" data-info="Switch que permite cambiar el tema de la página light / dark"></label>
                     </div>
-
                 </div>
             </div>
         `
