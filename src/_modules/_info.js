@@ -3,7 +3,6 @@
  * @module Info
  * @author Federico Manzano <Estudiante de Ingeniería en Informática>
  */
-
 const InfoInit = () => {
 
 
