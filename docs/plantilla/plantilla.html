@@ -129,6 +129,27 @@
                     nisi, animi optio voluptates laboriosam vitae.
                 </p>
 
+                <div class="alert">
+                    <h4 class="c-blue-s"><i class="bs-info c-blue-s">&nbsp;</i>Información</h4>
+                    <p>
+                        Esto es una alerta informativa, utilizando las fuentes de Bodystyle.
+                    </p>
+                </div>
+
+                <div class="alert mt-3" >
+                    <h4 class="c-yellow"><i class="bs-warning c-yellow">&nbsp;</i>Advertencia</h4>
+                    <p>
+                        Esto es una alerta de advertencia, utilizando las fuentes de Bodystyle.
+                    </p>
+                </div>
+
+                <div class="alert mt-3" >
+                    <h4 class="c-red"><i class="bs-cancel c-red">&nbsp;</i>Peligro</h4>
+                    <p>
+                        Esto es una alerta de advertencia, utilizando las fuentes de Bodystyle.
+                    </p>
+                </div>
+
             </article>
 
             <article class="article">
@@ -149,134 +170,72 @@
         <i class="bs-copy c-bodyui fz-20 btn-copy"></i>
     </label>
 <pre class="cod-sql pt-1">
-     USE db_alquileres_vehiculos
-
-    /***
-        Procedimiento para generar la factura para un alquiler:
-        Un alquiler puede estár compuesto por hasta (3) tuplas 
-        de la tabla alquiler,para todas ellas va a existir un 
-        único codigo de factura.
-        PARAMETROS: 
-            @TIPO_DOC -- Tipo de documento.
-            @NRO_DOC  -- Nro de documento.
-            @F_ALQ    -- Fecha en la que se realizó el alquiler.
-            @COD_FAC  -- Código de factura unívoco para el alquiler.
-    */
-    GO
-    CREATE OR ALTER PROCEDURE [negocio].[sp_Generar_Factura]
-    @TIPO_DOC       TINYINT,
-    @NRO_DOC        VARCHAR(8),
-    @F_ALQ          DATE,
-    @COD_FAC        CHAR(10),
-    @RES            INT     OUTPUT
-    AS 
-    BEGIN 
-        BEGIN TRANSACTION T_GENERAR_FACTURA
-        BEGIN TRY
-            DECLARE @MONTO_TOTAL DECIMAL(10,2)
-            IF   
-            (
-                SELECT COUNT(*)
-                FROM [db_alquileres_vehiculos].[negocio].[Alquiler]
-                WHERE   TipoDoc             = @TIPO_DOC   AND 
-                        NroDoc              = @NRO_DOC    AND 
-                        FAlq                = @F_ALQ      AND 
-                        CodFactura   IS NULL 
-            ) = 0
-            BEGIN 
-                SET @RES = 0
-                RAISERROR('El alquiler ya dispone de factura', 16, 1)
-            END
-    
-            IF EXISTS
-            (
-                SELECT 1
-                FROM  [db_alquileres_vehiculos].[negocio].[Alquiler]
-                WHERE   TipoDoc             = @TIPO_DOC   AND 
-                        NroDoc              = @NRO_DOC    AND 
-                        FAlq                = @F_ALQ      AND 
-                        Estado               IN (0,1,2,5) AND
-                        CodFactura  IS  NOT NULL    
-            )
-            BEGIN 
-                
-                SET @COD_FAC = 
-                (
-                    SELECT TOP (1)CodFactura
-                    FROM  [db_alquileres_vehiculos].[negocio].[Alquiler]
-                    WHERE   TipoDoc             = @TIPO_DOC   AND 
-                            NroDoc              = @NRO_DOC    AND 
-                            CodFactura   IS NOT NULL          AND
-                            Estado              IN (0,1)      
-                )
-             
-                UPDATE [db_alquileres_vehiculos].[negocio].[Alquiler]
-                SET     CodFactura = @COD_FAC
-                WHERE       TipoDoc             =       @TIPO_DOC   AND 
-                            NroDoc              =       @NRO_DOC    AND 
-                            FAlq                =       @F_ALQ      AND 
-                            Estado              =       0           AND 
-                            CodFactura     IS NULL
-    
-                 SET @MONTO_TOTAL =  [db_alquileres_vehiculos].[negocio].[fn_Calcular_Monto_Total]
-                                                  (@TIPO_DOC, @NRO_DOC, @F_ALQ)
-    
-                IF @MONTO_TOTAL IS NULL OR @MONTO_TOTAL = 0
-                BEGIN 
-                    SET @RES = 2
-                    RAISERROR('El monto para la fecha solicitada es erroneo', 16, 1)
-                END
-    
-                UPDATE [db_alquileres_vehiculos].[negocio].[Factura]
-                SET MontoTotal = @MONTO_TOTAL
-                WHERE CodFactura = @COD_FAC
-    
-                SET @RES = 1
-                COMMIT TRANSACTION T_GENERAR_FACTURA
-                RETURN 1
-            END
-                
-            SET @MONTO_TOTAL =  [db_alquileres_vehiculos].[negocio].[fn_Calcular_Monto_Total]
-                                                  (@TIPO_DOC, @NRO_DOC, @F_ALQ)
-    
-            IF @MONTO_TOTAL IS NULL OR @MONTO_TOTAL = 0
-            BEGIN 
-                SET @RES = 2
-                RAISERROR('El monto para la fecha solicitada es erroneo', 16, 1)
-            END
-    
-            INSERT INTO [db_alquileres_vehiculos].[negocio].[Factura]
-            (   CodFactura,     FechaFactura,   MontoTotal  ) VALUES 
-            (   @COD_FAC,       @F_ALQ,         @MONTO_TOTAL)
-    
-            UPDATE [db_alquileres_vehiculos].[negocio].[Alquiler]
-            SET     CodFactura = @COD_FAC
-            WHERE       TipoDoc             =       @TIPO_DOC   AND 
-                        NroDoc              =       @NRO_DOC    AND 
-                        FAlq                =       @F_ALQ      AND 
-                        Estado              =       0           AND 
-                        CodFactura  IS      NULL
-    
-            SET @RES = 1
-            COMMIT TRANSACTION T_GENERAR_FACTURA
-        END TRY 
-        BEGIN CATCH
-            DECLARE @MJE_ERROR  NVARCHAR(100),
-                    @EST        INT,
-                    @SEV        INT 
-    
-            SELECT  @MJE_ERROR  = ERROR_MESSAGE(),
-                    @EST        = ERROR_STATE(),
-                    @SEV        = ERROR_SEVERITY()
-    
-            RAISERROR(@MJE_ERROR, @SEV, @EST)        
-    
-            ROLLBACK TRANSACTION T_GENERAR_FACTURA
-        END CATCH
-    END
+    -- Esto es código SQL 
+    SELECT nombre, apellido, email
+    FROM usuarios
+    WHERE activo = 1;
 </pre>
 </div>
 
+<div class="codigo">
+    <label for="cod-html" 
+    class="label">
+        JS
+        <i class="bs-copy c-bodyui fz-20 btn-copy"></i>
+    </label>
+<pre class="cod-js pt-1">
+    // Esto es código JavaScript
+    function saludar(nombre) {
+        console.log("Hola, " + nombre + "!");
+    }
+    
+    saludar("Mundo");
+</pre>
+</div>
+
+<div class="codigo">
+    <label for="cod-html" 
+    class="label">
+        HTML
+        <i class="bs-copy c-bodyui fz-20 btn-copy"></i>
+    </label>
+<pre class="cod-html pt-1">
+    <!-- Esto es código HTML -->
+    <div>
+       <h1>Hola Mundo</h1>
+       <p>Este es un ejemplo de código HTML.</p>
+    </div>
+</pre>
+</div>
+
+<div class="codigo">
+    <label for="cod-html" 
+    class="label">
+        JAVA
+        <i class="bs-copy c-bodyui fz-20 btn-copy"></i>
+    </label>
+<pre class="cod-java pt-1">
+    public static void main(String[] args) {
+        // Esto es código Java
+        System.out.println("Hola, Mundo!");
+    }
+</pre>
+</div>
+
+<div class="codigo">
+    <label for="cod-html" 
+    class="label">
+        CSS
+        <i class="bs-copy c-bodyui fz-20 btn-copy"></i>
+    </label>
+<pre class="cod-css pt-1">
+    /* Esto es código CSS */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+    }
+</pre>
+</div>
             </article>
 
             <article class="article">
@@ -291,20 +250,9 @@
 
     <div class="lista-scroll ocultar-desde-medianos">
         <ul>
-            <li><a href="#1">📇 Get Started</a></li>
-            <li><a href="#2">📇 Filosofía</a></li>
-            <li><a href="#3">📇 Core Bodystyle</a></li>
-            <li><a href="#4">📇 Utilizar Bodystyle</a></li>
-            <li><a href="#5">📇 Descarga Directa</a></li>
-            <li><a href="#6">📇 CDN</a></li>
-            <li><a href="#7">📇 NPM</a></li>
-            <li><a href="#8">📇 Primeros Pasos</a></li>
-            <li><a href="#9">📇 Navegadores</a></li>
-            <li><a href="#10">📇 FAQ</a></li>
-            <li><a href="#11">📇 ScrollSpy vs Reveal</a></li>
-            <li><a href="#12">📇 Fuente Nueva</a></li>
-            <li><a href="#13">📇 Angular / React</a></li>
-            <li><a href="#11">📇 Porque Bodystyle?</a></li>
+            <li><a href="#1">Opción 1</a></li>
+            <li><a href="#2">Opción 2</a></li>
+            <li><a href="#3">Opción 3</a></li>
             <li><a href="#autor">🧑‍🏫 Autor</a></li>
         </ul>
     </div>
@@ -319,6 +267,9 @@
         BS.BotonInicioInit()
         BS.CodigoHtmlInit()
         BS.CodigoSqlInit()
+        BS.CodigoJsInit()
+        BS.CodigoJavaInit()
+        BS.CodigoCssInit()
         BS.PersonalizadoInit({ori: "disparador"})
         document.querySelectorAll("#l1 ul li a")[1].classList.add("c-red");
 

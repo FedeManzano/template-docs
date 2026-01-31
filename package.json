@@ -17,8 +17,8 @@
     "build": "webpack"
   },
   "devDependencies": {
-    "@babel/core": "^7.28.5",
-    "@babel/preset-env": "^7.28.5",
+    "@babel/core": "^7.28.6",
+    "@babel/preset-env": "^7.28.6",
     "babel": "^5.8.38",
     "babel-loader": "^10.0.0",
     "webpack": "^5.104.1",
