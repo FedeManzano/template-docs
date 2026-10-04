@@ -7,7 +7,7 @@
 <p align="center">
   <a href="https://mega.nz/file/8cFFjSYZ#y82eMpvPRGRoQZUA8Lktuj3oHmFVMonJAE8hgFHj1MA"><img src="https://img.shields.io/badge/MEGA-Download-green" alt="MEGA Download"></a>
   <a href="https://mega.nz/file/dFMVnaSD#Bl1jtd8F_wN4Egd-_ijJdodQPOkI0owOw8N3kT7sgCo"><img src="https://img.shields.io/badge/Template-v1.0.0-blue" alt="Docs Download"></a>
-  <a href="https://fedemanzano.github.io/docs-bodystyle/"><img src="https://img.shields.io/badge/Ejemplo-red" alt="Online Docs"></a>
+  <a href="https://fedemanzano.github.io/docs-bodystyle/"><img src="https://img.shields.io/badge/Ejemplo-bodystyle-red" alt="Online Docs"></a>
 </p>
 
 ---
