@@ -23,7 +23,7 @@
 
 Desde el enlace hay un ejemplo del template funcionando.
 
-<a align="center" href="https://bodystyle.webcindario.com">Bodystyle Docs</a>
+<a align="center" href="https://fedemanzano.github.io/docs-bodystyle/">Bodystyle Docs</a>
 
 > Desde el enlace de arriba podemos ver un ejemplo del template funcionando como documentación de [Bodystyle](https://github.com/FedeManzano/bodystyle).
 
